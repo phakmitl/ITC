@@ -7,6 +7,7 @@
 #define led3 2
 
 int Rstate = 0,Gstate = 0,Ystate = 0;
+
 unsigned int pastsw1 = 0,pastsw2 = 0,pastsw3 = 0;
 unsigned int pastR = 0,pastG = 0,pastY = 0 ;
 int delaytime = 400;
@@ -26,21 +27,24 @@ void loop() {
   int count = millis();
   
   //RED
-  //Serial.println(String("switch1 = ")+sw1);
-  if(digitalRead(sw1) == HIGH && Rstate == 0 ) 
+  //Serial.println(String("switch1 = ")+digitalRead(sw1));
+  if(digitalRead(sw1) == HIGH ) 
   {
+    //pastsw1 = count;
     if(count - pastsw1 >= delaytime)
     {
       digitalWrite(led1,HIGH);
       Rstate = 1;
       pastsw1 = count;
       pastR = pastsw1;
+      Serial.println(pastR);
       Serial.println("R1");
     }    
   }
-  else if( digitalRead(sw1) != digitalRead(sw1) && Rstate ==1 )
+  else if(digitalRead(sw1)!=digitalRead(sw1) && Rstate ==1 )
   {
-    if(count - pastsw1 >= delaytime)
+    //Serial.println("BOB");
+    if(count - pastsw1 >= 500)
     {
       digitalWrite(led1,LOW);
       Rstate = 0;
@@ -56,7 +60,6 @@ void loop() {
     //pastR = count;
     Serial.println("R3");
   }
-  Serial.println(digitalRead(sw1));
 /*  
   //GREEN
   //Serial.println(digitalRead(sw3));
