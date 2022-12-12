@@ -9,6 +9,17 @@ int cx = 1, cy = 1;
 int x0 = 30, x1 = 40;
 int gg = 1;
 
+void pong()
+{
+    OLED.clearDisplay();
+    OLED.setTextColor(WHITE); 
+    OLED.setCursor(40,0);
+    OLED.setTextSize(2); 
+    OLED.println("PONG"); 
+    OLED.display();
+    delay(1000);
+}
+
 void setup()
 {
   Serial.begin(115200); 
@@ -16,6 +27,7 @@ void setup()
   pinMode(11,OUTPUT);
   pinMode(7,INPUT_PULLUP);
   pinMode(6,INPUT_PULLUP);
+  pong();
 }
 
 void ball(int xb, int yb)
@@ -32,7 +44,6 @@ void paddle(int x0, int x1)
 
 void loop()
 {
-  Serial.print(yb);
   OLED.clearDisplay();
   if (digitalRead(7) == 0){
     x0 = x0 + 7;
@@ -71,9 +82,9 @@ void loop()
   if(gg == 0){
     OLED.clearDisplay();
     OLED.setTextColor(WHITE); 
-    OLED.setCursor(10,0);
+    OLED.setCursor(12,0);
     OLED.setTextSize(2); 
-    OLED.println("gameover"); 
+    OLED.println("Gameover"); 
     OLED.display();
-   }
+   } 
 }
